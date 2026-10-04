@@ -3,6 +3,8 @@ const panel1 = document.getElementById("panel1");
 const panel2 = document.getElementById("panel2");
 const dancer = document.getElementById("dancer");
 
+const originalFloorColor = "#111";
+
 function randomColor() {
     const red = Math.floor(Math.random() * 255);
     const green = Math.floor(Math.random() * 255);
@@ -11,7 +13,7 @@ function randomColor() {
     return `rgb(${red},${green},${blue})`;
 }
 
-setInterval(function () {
+const panelTimer = setInterval(function () {
     panel1.style.backgroundColor = randomColor();
     panel2.style.backgroundColor = randomColor();
 }, 1500);
@@ -24,4 +26,19 @@ dancer.addEventListener("click", function (event) {
     event.stopPropagation();
 
     dancer.textContent = "💃";
+});
+
+window.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowUp") {
+        dancer.textContent = "🕺";
+    } else if (event.key === "ArrowDown") {
+        dancer.textContent = "💃";
+    } else if (event.key === "ArrowLeft") {
+        dancer.textContent = "🕴️";
+    } else if (event.key === "ArrowRight") {
+        dancer.textContent = "💃";
+    } else if (event.key.toLowerCase() === "r") {
+        danceFloor.style.backgroundColor = originalFloorColor;
+        clearInterval(panelTimer);
+    }
 });
